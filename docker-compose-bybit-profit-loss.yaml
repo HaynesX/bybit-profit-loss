@@ -1,6 +1,6 @@
 version: '3'
 services:
-  profit-loss:
+  bybit-profit-loss:
     image: haynesx11/bybit-profit-loss:${TAG}
     container_name: bybit-profit-loss
     command: >
@@ -13,6 +13,6 @@ services:
     env_file:
       - ../env/bybit-profit-loss.env
     volumes:
-      - ../bybit-profit-loss-data:/home/bybit-profit-loss
+      - ../bybit-profit-loss-data:/home/bybit-profit-loss/pnlData/
 
 

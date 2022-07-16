@@ -20,7 +20,7 @@ bot = telebot.TeleBot(TELEGRAM_SECRET_KEY)
 
 scope = ["https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
 
-creds = ServiceAccountCredentials.from_json_keyfile_name("haynes-bybit-b58869a98ed4.json", scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name("pnlData/haynes-bybit-b58869a98ed4.json", scope)
 
 googleClient = gspread.authorize(creds)
 
@@ -37,7 +37,7 @@ session = inverse_perpetual.HTTP(
 def poll_bybit():
     try:
         while True:
-            with open('data.json') as json_file:
+            with open('pnlData/data.json') as json_file:
                 calculatedProfitAndLoss = json.load(json_file)
                 listOfKeys = list(calculatedProfitAndLoss.keys())
 
@@ -150,7 +150,7 @@ P&L: <b>{round(eachRow[6], 2)}%</b>
 
                     time.sleep(3)
 
-                with open("data.json", "w") as outfile:
+                with open("pnlData/data.json", "w") as outfile:
                     json.dump(calculatedProfitAndLoss, outfile)
 
     except:
