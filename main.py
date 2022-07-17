@@ -153,7 +153,7 @@ P&L: <b>{round(eachRow[6], 2)}%</b>
                 with open("pnlData/data.json", "w") as outfile:
                     json.dump(calculatedProfitAndLoss, outfile)
 
-    except SyntaxError:
+    except:
         print("ERROR!")
 
 
