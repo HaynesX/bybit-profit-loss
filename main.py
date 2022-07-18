@@ -39,7 +39,7 @@ def poll_bybit():
     while True:
         time.sleep(7)
         print("Starting up bot.")
-        bot.send_message(TELEGRAM_CHAT_ID, "Starting up bot.", parse_mode="HTML", disable_web_page_preview=True)
+        bot.send_message("-734646829", "Starting up bot.", parse_mode="HTML", disable_web_page_preview=True)
         try:
             while True:
                 with open('pnlData/data.json') as json_file:
@@ -109,11 +109,11 @@ def poll_bybit():
                     avgEntryPrice = eachResult["avg_entry_price"]
                     avgClosePrice = eachResult["avg_exit_price"]
                     closedProfitAndLoss = eachResult["closed_pnl"]
-                    closedProfitAndLossPercentage = (closedProfitAndLoss / cumulativeBalance) / 100 #Needs to multiply by 100 in spreadsheet
+                    closedProfitAndLossPercentage = (closedProfitAndLoss / cumulativeBalance) * 100 #Needs to multiply by 100 in spreadsheet
                     oldBalance = cumulativeBalance
                     cumulativeBalance += closedProfitAndLoss
                     cumulativeProfitAndLoss += closedProfitAndLoss
-                    cumulativeProfitAndLossPercentage = (cumulativeProfitAndLoss / startingBalance) / 100 #Needs to multiply by 100 in spreadsheet
+                    cumulativeProfitAndLossPercentage = (cumulativeProfitAndLoss / startingBalance) * 100 #Needs to multiply by 100 in spreadsheet
                     created_at = datetime.fromtimestamp(eachResult["created_at"])
                     created_at_string = created_at.strftime("%d/%m/%Y, %H:%M:%S")
                     winOrLoss = ""
@@ -132,7 +132,7 @@ def poll_bybit():
                     if orderID not in calculatedProfitAndLoss:
                         calculatedProfitAndLoss[orderID] = {"orderID": orderID, "Close_Time": eachResult['created_at'], "side": side, "avgEntryPrice": avgEntryPrice, "avgClosePrice": avgClosePrice, "P&L (BTC)": closedProfitAndLoss, "P&L %": closedProfitAndLossPercentage, "Cumulative P&L (BTC)": cumulativeProfitAndLoss, "Cumulative P&L %": cumulativeProfitAndLossPercentage, "Previous Balance": oldBalance, "New Balance": cumulativeBalance, "Created at": created_at_string, "WinOrLoss": winOrLoss}
 
-                        allRows.append([orderID, created_at_string, side, avgEntryPrice, avgClosePrice, closedProfitAndLoss, closedProfitAndLossPercentage, cumulativeProfitAndLoss, cumulativeProfitAndLossPercentage, oldBalance, cumulativeBalance, winOrLoss, "", "", "", "", "", ""])
+                        allRows.append([orderID, created_at_string, side, avgEntryPrice, avgClosePrice, closedProfitAndLoss, closedProfitAndLossPercentage, cumulativeProfitAndLoss, cumulativeProfitAndLossPercentage, oldBalance, cumulativeBalance, winOrLoss, "", "", "", "", closedProfitAndLossPercentage])
                 
                 
 
@@ -170,8 +170,8 @@ def poll_bybit():
             print("ERROR!")
             print(e)
             print(traceback.format_exc())
-            bot.send_message(TELEGRAM_CHAT_ID, e, parse_mode="HTML", disable_web_page_preview=True)
-            bot.send_message(TELEGRAM_CHAT_ID, traceback.format_exc(), parse_mode="HTML", disable_web_page_preview=True)
+            bot.send_message("-734646829", e, parse_mode="HTML", disable_web_page_preview=True)
+            bot.send_message("-734646829", traceback.format_exc(), parse_mode="HTML", disable_web_page_preview=True)
 
 
 
