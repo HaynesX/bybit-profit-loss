@@ -40,6 +40,7 @@ def poll_bybit():
         time.sleep(7)
         print("Starting up bot.")
         bot.send_message(TELEGRAM_CHAT_ID, "Starting up bot.", parse_mode="HTML", disable_web_page_preview=True)
+        bot.send_message(TELEGRAM_CHAT_ID, f"{BYBIT_SECRET}", parse_mode="HTML", disable_web_page_preview=True)
         try:
             while True:
                 with open('pnlData/data.json') as json_file:
