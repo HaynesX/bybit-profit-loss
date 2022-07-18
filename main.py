@@ -40,7 +40,6 @@ def poll_bybit():
         time.sleep(7)
         print("Starting up bot.")
         bot.send_message(TELEGRAM_CHAT_ID, "Starting up bot.", parse_mode="HTML", disable_web_page_preview=True)
-        bot.send_message(TELEGRAM_CHAT_ID, f"{BYBIT_SECRET}", parse_mode="HTML", disable_web_page_preview=True)
         try:
             while True:
                 with open('pnlData/data.json') as json_file:
@@ -48,7 +47,7 @@ def poll_bybit():
                     listOfKeys = list(calculatedProfitAndLoss.keys())
 
                     if len(listOfKeys) == 0:
-                        filterDate = datetime.strptime('Jun 29 2022  6:30AM', '%b %d %Y %I:%M%p')
+                        filterDate = datetime.strptime('Jul 14 2022  11:59PM', '%b %d %Y %I:%M%p')
                         filterDateTimestamp = datetime.timestamp(filterDate)
                     else:
                         filterDateTimestamp = calculatedProfitAndLoss[listOfKeys[0]]["Close_Time"]
@@ -98,7 +97,7 @@ def poll_bybit():
                 for eachResult in allResults:
                     combinedResults.append(eachResult)
 
-                startingBalance = 0.00908992
+                startingBalance = 0.00918175
 
                 allRows = []
 
@@ -118,6 +117,11 @@ def poll_bybit():
                     created_at = datetime.fromtimestamp(eachResult["created_at"])
                     created_at_string = created_at.strftime("%d/%m/%Y, %H:%M:%S")
                     winOrLoss = ""
+
+                    if side == "Buy":
+                        side = "Short"
+                    else:
+                        side = "Long"
                         
                     if closedProfitAndLoss < 0:
                         winOrLoss = "Loss"
@@ -134,7 +138,10 @@ def poll_bybit():
 
                 if len(allRows) > 0:
                     print("New P&L Found. Adding to Google Sheet.")
-                    sheet.append_rows(allRows, table_range='A1')
+                    allRows.reverse()
+                    sheet.insert_rows(allRows, row=2)
+
+                    allRows.reverse()
 
                     for eachRow in allRows:
                         
