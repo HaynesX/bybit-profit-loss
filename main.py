@@ -36,10 +36,17 @@ session = inverse_perpetual.HTTP(
 
 def poll_bybit():
     while True:
-        time.sleep(5)
+        time.sleep(7)
         print("Starting up bot.")
+        bot.send_message(TELEGRAM_CHAT_ID, "Starting up bot.", parse_mode="HTML", disable_web_page_preview=True)
         try:
             while True:
+
+                x = {}
+                print(x[4][2])
+                print("This should error out.")
+
+
                 with open('pnlData/data.json') as json_file:
                     calculatedProfitAndLoss = json.load(json_file)
                     listOfKeys = list(calculatedProfitAndLoss.keys())
@@ -159,6 +166,7 @@ def poll_bybit():
         except Exception as e:
             print("ERROR!")
             print(e)
+            bot.send_message(TELEGRAM_CHAT_ID, e, parse_mode="HTML", disable_web_page_preview=True)
 
 
 
