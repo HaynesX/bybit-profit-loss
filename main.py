@@ -47,7 +47,7 @@ def poll_bybit():
                     listOfKeys = list(calculatedProfitAndLoss.keys())
 
                     if len(listOfKeys) == 0:
-                        filterDate = datetime.strptime('Jul 14 2022  11:59PM', '%b %d %Y %I:%M%p')
+                        filterDate = datetime.strptime('Jul 18 2022  1:00AM', '%b %d %Y %I:%M%p')
                         filterDateTimestamp = datetime.timestamp(filterDate)
                     else:
                         filterDateTimestamp = calculatedProfitAndLoss[listOfKeys[0]]["Close_Time"]
@@ -97,7 +97,7 @@ def poll_bybit():
                 for eachResult in allResults:
                     combinedResults.append(eachResult)
 
-                startingBalance = 0.00918175
+                startingBalance = 0.00904901
 
                 allRows = []
 
