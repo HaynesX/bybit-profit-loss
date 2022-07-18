@@ -109,11 +109,11 @@ def poll_bybit():
                     avgEntryPrice = eachResult["avg_entry_price"]
                     avgClosePrice = eachResult["avg_exit_price"]
                     closedProfitAndLoss = eachResult["closed_pnl"]
-                    closedProfitAndLossPercentage = (closedProfitAndLoss / cumulativeBalance) * 100 #Needs to multiply by 100 in spreadsheet
+                    closedProfitAndLossPercentage = (closedProfitAndLoss / cumulativeBalance) / 100 #Needs to multiply by 100 in spreadsheet
                     oldBalance = cumulativeBalance
                     cumulativeBalance += closedProfitAndLoss
                     cumulativeProfitAndLoss += closedProfitAndLoss
-                    cumulativeProfitAndLossPercentage = (cumulativeProfitAndLoss / startingBalance) * 100 #Needs to multiply by 100 in spreadsheet
+                    cumulativeProfitAndLossPercentage = (cumulativeProfitAndLoss / startingBalance) / 100 #Needs to multiply by 100 in spreadsheet
                     created_at = datetime.fromtimestamp(eachResult["created_at"])
                     created_at_string = created_at.strftime("%d/%m/%Y, %H:%M:%S")
                     winOrLoss = ""
