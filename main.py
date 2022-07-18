@@ -1,4 +1,5 @@
 import time
+import traceback
 from pybit import inverse_perpetual
 from time import sleep
 from datetime import datetime
@@ -167,6 +168,7 @@ def poll_bybit():
             print("ERROR!")
             print(e)
             bot.send_message(TELEGRAM_CHAT_ID, e, parse_mode="HTML", disable_web_page_preview=True)
+            bot.send_message(TELEGRAM_CHAT_ID, traceback.format_exc(), parse_mode="HTML", disable_web_page_preview=True)
 
 
 
