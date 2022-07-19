@@ -132,7 +132,7 @@ def poll_bybit():
                     if orderID not in calculatedProfitAndLoss:
                         calculatedProfitAndLoss[orderID] = {"orderID": orderID, "Close_Time": eachResult['created_at'], "side": side, "avgEntryPrice": avgEntryPrice, "avgClosePrice": avgClosePrice, "P&L (BTC)": closedProfitAndLoss, "P&L %": closedProfitAndLossPercentage, "Cumulative P&L (BTC)": cumulativeProfitAndLoss, "Cumulative P&L %": cumulativeProfitAndLossPercentage, "Previous Balance": oldBalance, "New Balance": cumulativeBalance, "Created at": created_at_string, "WinOrLoss": winOrLoss}
 
-                        allRows.append([orderID, created_at_string, side, avgEntryPrice, avgClosePrice, closedProfitAndLoss, closedProfitAndLossPercentage, cumulativeProfitAndLoss, cumulativeProfitAndLossPercentage, oldBalance, cumulativeBalance, winOrLoss, "", "", "", "", closedProfitAndLossPercentage])
+                        allRows.append([orderID, created_at_string, side, avgEntryPrice, avgClosePrice, closedProfitAndLoss, closedProfitAndLossPercentage, cumulativeProfitAndLoss, cumulativeProfitAndLossPercentage, oldBalance, cumulativeBalance, winOrLoss, "", avgEntryPrice, "", "", "", closedProfitAndLossPercentage])
                 
                 
 
