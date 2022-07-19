@@ -139,7 +139,7 @@ def poll_bybit():
                 if len(allRows) > 0:
                     print("New P&L Found. Adding to Google Sheet.")
                     allRows.reverse()
-                    sheet.insert_rows(allRows, row=4)
+                    sheet.insert_rows(allRows, row=4, value_input_option='USER_ENTERED')
 
                     allRows.reverse()
 
