@@ -171,7 +171,6 @@ def poll_bybit():
             print(e)
             print(traceback.format_exc())
             bot.send_message("-734646829", e, disable_web_page_preview=True)
-            bot.send_message("-734646829", traceback.format_exc(), disable_web_page_preview=True)
 
 
 
