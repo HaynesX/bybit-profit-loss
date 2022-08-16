@@ -30,11 +30,11 @@ jobs:
           name: Build and push Docker image
           command: |
             echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
-            docker build -t haynesx12/bybit-profit-loss-sheet2:$CIRCLE_TAG .
-            docker push haynesx12/bybit-profit-loss-sheet2:$CIRCLE_TAG
+            docker build -t haynesx11/bybit-profit-loss:$CIRCLE_TAG .
+            docker push haynesx11/bybit-profit-loss:$CIRCLE_TAG
       - run:
           name: SSH in to DigitalOcean Server & Run Containers via Deploy.sh Script
-          command: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "bash deploy-profit-loss-sheet2.sh $CIRCLE_TAG"
+          command: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "bash deploy-profit-loss.sh $CIRCLE_TAG"
 
 
 workflows:

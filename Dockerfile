@@ -1,10 +1,10 @@
 FROM python:3.8
 
-RUN mkdir -p /home/bybit-profit-loss-sheet2
-WORKDIR /home/bybit-profit-loss-sheet2
+RUN mkdir -p /home/bybit-profit-loss
+WORKDIR /home/bybit-profit-loss
 
-COPY requirements.txt /home/bybit-profit-loss-sheet2
+COPY requirements.txt /home/bybit-profit-loss
 
-RUN pip install -r /home/bybit-profit-loss-sheet2/requirements.txt
+RUN pip install -r /home/bybit-profit-loss/requirements.txt
 
-COPY . /home/bybit-profit-loss-sheet2
+COPY . /home/bybit-profit-loss
