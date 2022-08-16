@@ -17,15 +17,19 @@ BYBIT_SECRET_KEY = os.getenv('BYBIT_SECRET_KEY')
 BYBIT_SECRET = os.getenv('BYBIT_SECRET')
 
 
+
+PNL_DATA_JSON_PATH = "pnlData/haynes-bybit-b58869a98ed4.json"
+
+
 bot = telebot.TeleBot(TELEGRAM_SECRET_KEY)
 
 scope = ["https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
 
-creds = ServiceAccountCredentials.from_json_keyfile_name("pnlData/haynes-bybit-b58869a98ed4.json", scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name(PNL_DATA_JSON_PATH, scope)
 
 googleClient = gspread.authorize(creds)
 
-sheet = googleClient.open("Trades - Bybit").sheet1
+sheet = googleClient.open("Trades - Bybit").worksheet("Multi EMA/MA 17 min Bybit")
 
 session = inverse_perpetual.HTTP(
     endpoint='https://api.bybit.com', 
@@ -39,7 +43,7 @@ def poll_bybit():
     while True:
         time.sleep(7)
         print("Starting up bot.")
-        bot.send_message("-734646829", "Starting up bot.", parse_mode="HTML", disable_web_page_preview=True)
+        bot.send_message("-670589159", "Starting up bot.", parse_mode="HTML", disable_web_page_preview=True)
         try:
             while True:
                 with open('pnlData/data.json') as json_file:
@@ -47,7 +51,7 @@ def poll_bybit():
                     listOfKeys = list(calculatedProfitAndLoss.keys())
 
                     if len(listOfKeys) == 0:
-                        filterDate = datetime.strptime('Jul 18 2022  1:00AM', '%b %d %Y %I:%M%p')
+                        filterDate = datetime.strptime('Aug 11 2022  1:00AM', '%b %d %Y %I:%M%p')
                         filterDateTimestamp = datetime.timestamp(filterDate)
                     else:
                         filterDateTimestamp = calculatedProfitAndLoss[listOfKeys[0]]["Close_Time"]
@@ -97,7 +101,7 @@ def poll_bybit():
                 for eachResult in allResults:
                     combinedResults.append(eachResult)
 
-                startingBalance = 0.00904901
+                startingBalance = 1.04456380
 
                 allRows = []
 
@@ -170,7 +174,7 @@ def poll_bybit():
             print("ERROR!")
             print(e)
             print(traceback.format_exc())
-            bot.send_message("-734646829", e, disable_web_page_preview=True)
+            bot.send_message("-670589159", e, disable_web_page_preview=True)
 
 
 
