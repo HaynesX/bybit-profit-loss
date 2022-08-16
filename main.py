@@ -25,7 +25,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_name("pnlData/haynes-bybit-b
 
 googleClient = gspread.authorize(creds)
 
-sheet = googleClient.open("Trades - Bybit").sheet1
+sheet = googleClient.open("Trades - Bybit").worksheet("Bull/Bear 17 Min Bybit")
 
 session = inverse_perpetual.HTTP(
     endpoint='https://api.bybit.com', 
